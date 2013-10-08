@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" class="no-us">
+	<head>
+		<meta charset="utf-8">
+		<title>Thi Shopping Cart</title>
+	</head>
+	
+	<body>
+		<article>
+			<header><h1>Available items</h1></header>
+			<div data-bind="foreach:items">
+				<div>
+					<span data-bind="text:name"></span>,
+					$<span data-bind="text:price"></span>,
+					<span data-bind="text:stock()"></span>
+					<button type="button" data-bind="visible:inStock,click:$parent.buy">Buy</button>
+					<span data-bind="visible:!inStock()">Sold out!!!</span>
+					|
+					<button data-bind="click:$parent.selectItem">Edit</button>
+				</div>
+			
+			</div>
+		</article>
+		
+		
+		
+		<article data-bind="with:selectedItem">
+			<header><h2>Editing</h2></header>
+				<div>
+					<input type="text" data-bind="value:name"></input>,
+					<input type="text" data-bind="value:price"></input>,
+					<input type="text" data-bind="value:stock()"></input>
+					<button type="button" data-bind="click:$parent.newItem">Save</button>
+					<button data-bind="click:$parent.cancelItem">Cancel</button>
+				</div>
+		</article>
+		
+		
+		
+		
+		<hr/>
+		<div>
+			<article data-bind="with:cart">
+
+				<header><h1>What's in my cart</h1></header>
+
+					<div data-bind="if:isEmpty">
+						Currently is empty
+					</div>			
+					
+					
+				<div data-bind="foreach:items">
+					<article>
+						<header><h3 data-bind="text:name"></h3></header>
+						<div>
+							Quantity: <input type="text" data-bind="value:bought"/>, 
+							@ price: $<span data-bind="text:price"></span>, 
+							Total: $<span data-bind="text:subtotal"></span> 
+							<button type="button" data-bind="click:commit">Update</button>
+							<button type="button" data-bind="click:reset">Remove</button>
+						</div>
+					</article>
+				</div>
+				
+				<div data-bind="visible:!isEmpty()">
+				Sub total: $<span data-bind="text:total"></span>
+				</div>
+			</article>
+		</div>
+		
+
+	</body>
+
+	<script type="text/javascript" src="js/thirdparties/knockout-3.0.0beta.debug.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/cart.js"></script>
+	<script type="text/javascript" src="js/utilities/ko-protected-observable.js"></script>
+	<script src="js/models/Product.js"></script>
+	
+	<script>
+		var app = new window.TShoppingCart.App();
+		app.init();
+		ko.applyBindings(app);
+	</script>
+</html>

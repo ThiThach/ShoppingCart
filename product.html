@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" class="no-us">
+	<head>
+		<meta charset="utf-8">
+		<title>Products</title>
+	</head>
+	
+	<body>
+		<table data-bind="foreach:items">
+			<tr>
+				<td><input type="text" data-bind="value:name"></td>
+			</tr>
+		</table>
+	</body>
+
+	<script type="text/javascript" src="js/thirdparties/knockout-3.0.0beta.debug.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/cart.js"></script>
+	<script src="js/models/Product.js"></script>
+	
+	<script>
+		var app = new window.TShoppingCart.App();
+		app.init();
+		ko.applyBindings(app);
+	</script>
+</html>
