@@ -29,7 +29,7 @@
 				<div>
 					<input type="text" data-bind="value:name"></input>,
 					<input type="text" data-bind="value:price"></input>,
-					<input type="text" data-bind="value:stock()"></input>
+					<input type="text" data-bind="value:stock"></input>
 					<button type="button" data-bind="click:$parent.newItem">Save</button>
 					<button data-bind="click:$parent.cancelItem">Cancel</button>
 				</div>
@@ -56,7 +56,7 @@
 							Quantity: <input type="text" data-bind="value:bought"/>, 
 							@ price: $<span data-bind="text:price"></span>, 
 							Total: $<span data-bind="text:subtotal"></span> 
-							<button type="button" data-bind="click:commit">Update</button>
+							<button type="button" data-bind="click:save">Update</button>
 							<button type="button" data-bind="click:reset">Remove</button>
 						</div>
 					</article>
