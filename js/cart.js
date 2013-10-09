@@ -26,11 +26,11 @@ window.TShoppingCart.Cart = function(data) {
 		}
 	};
 	
-	self.total = ko.computed(function(){
+	self.subtotal = ko.computed(function(){
 		var total = 0;
 		ko.utils.arrayForEach(self.items(), function(item){
 			if(item.bought()) {
-				total += item.subtotal();
+				total += item.total();
 			}
 		});
 		

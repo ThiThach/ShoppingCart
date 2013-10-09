@@ -17,14 +17,18 @@ window.TShoppingCart.Product = function(data) {
 
 	//methods and events ---------
 	self.bought.subscribe(function(newValue){
-		var val = parseInt(newValue);
-		if (val > _originalStock) {
-			val = _originalStock;
-			self.bought(val);
-			return;
-		}
-		
-		self.stock(_originalStock - val);
+		setTimeout(function(){
+			var val = parseInt(newValue);
+			if (val > _originalStock) {
+				val = _originalStock;
+				self.bought(val);
+				self.bought.commit();
+			}
+	
+			self.stock(_originalStock - val);
+			self.stock.commit();		
+		}, 500);
+
 	});
 	
 	self.buy = function() {
@@ -36,12 +40,13 @@ window.TShoppingCart.Product = function(data) {
 		return (self.stock() > 0);
 	});
 	
-	self.subtotal = ko.computed(function(){
-		return self.bought() * self.price;
+	self.total = ko.computed(function(){
+		return self.bought() * self.price();
 	});
 
 	self.reset = function() {
 		self.bought(0);
+		self.bought.commit();
 	};
 
 	self.save = function() {
@@ -50,6 +55,10 @@ window.TShoppingCart.Product = function(data) {
 				self[property].commit();
 		}
 		
-		_originalStock = self.stock();
+		_originalStock = parseInt(self.stock()) + parseInt(self.bought());
 	}	
+	
+	self.updatePurchaseQuantity = function() {
+		self.bought.commit();		
+	}
 };

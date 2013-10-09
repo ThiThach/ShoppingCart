@@ -28,18 +28,22 @@ window.TShoppingCart.App = function(data) {
 	//------ Thi codes --------
 	self.selectedItem = ko.observable(null);
 	self.selectItem = function() {
-		self.selectedItem(this);
+		self.selectedItem(this);		
 	};
 	
 	self.newItem = function() {
+		var item = new TShoppingCart.Product({id:0,name:'new product',price:'1.99',stock:1});
+		self.selectedItem(item);
+	};
+	
+	self.saveItem = function() {
 		var currentItem = self.selectedItem();
-		var isOldRecord = (currentItem && currentItem.id);
+		var isNew = (currentItem && currentItem.id() === 0);
+		currentItem.save();
 		
-		if (isOldRecord){
-			currentItem.save();
-		}
-		else {
-			var item = new TShoppingCart.Product({id:self.items.length+1,name:self.selectedItem().name,price:'2',stock:10});
+		if (isNew){
+			var obj = {id:self.items().length+1,name:currentItem.name(),price:currentItem.price(),stock:currentItem.stock()};
+			var item = new TShoppingCart.Product(obj);
 			self.items.push(item);
 		}
 		
