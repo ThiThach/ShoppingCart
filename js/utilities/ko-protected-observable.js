@@ -29,39 +29,3 @@ ko.protectedObservable = function(initialValue){
 	
 	return result;
 };
-
-
-ko.protectedObservableItem = function(item){
-	for (var param in item){
-		if (item.hasOwnProperty(param))
-		{
-			if (typeof item[param] == "function")
-				this[param] = item[param];
-			else
-				this[param] = ko.protectedObservable(item[param]);
-		}
-	}
-	
-	this.commit = function() {
-		for (var property in this){
-			if (this.hasOwnProperty(property) && this[property].commit) //&& typeof item[param] != 'function'
-				this[property].commit();
-		}
-	}
-};
-
-ko.toProtectedObservableItemArray = function(sourceArray, convertToCallerObjectFirst, doneHandler) {
-	var drillItems = ko.utils.arrayMap(sourceArray, function(item){
-		if (convertToCallerObjectFirst != null)
-			item = convertToCallerObjectFirst(item);
-						
-		return new ko.protectedObservableItem(item);
-	});	
-	
-	if (doneHandler)
-		doneHandler(drillItems);
-		
-	return drillItems;
-};
-
-
