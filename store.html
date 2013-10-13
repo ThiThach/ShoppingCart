@@ -2,7 +2,7 @@
 <html lang="en" class="no-us">
 	<head>
 		<meta charset="utf-8">
-		<title>Thi Shopping Cart</title>
+		<title>Store</title>
 	</head>
 	
 	<body>
@@ -18,6 +18,8 @@
 					<span data-bind="visible:!inStock()">Sold out!!!</span>
 					|
 					<button data-bind="click:$parent.selectItem">Edit</button>
+					|
+					<button data-bind="click:$parent.remove">Remove</button>
 				</div>
 			
 			</div>
