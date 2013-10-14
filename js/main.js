@@ -26,6 +26,24 @@ require( ['cart'], function( ) {
 			item.buy();	
 		};
 	
+		self.remove = function(item){
+			//get the remove item from the cart
+			var tmp = ko.utils.arrayFirst(self.cart.items(), function(obj)
+			{
+				return (obj.id === item.id);
+			});
+			
+			if (tmp !== null)
+			{
+				//set the bought value to zero will auto delete this time from the cart
+				tmp.bought(0);	
+				tmp.save();
+			}
+			
+			//remove item from the product list
+			self.items.remove(item);
+		}
+	
 		//------ Thi codes --------
 		self.selectedItem = ko.observable(null);
 		self.selectItem = function() {
