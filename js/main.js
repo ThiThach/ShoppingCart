@@ -14,7 +14,7 @@ require( ['cart'], function( ) {
 						{id:3,name:'Coffee',price:'12.99',stock:50} 
 						];
 						
-			self.items = ko.observableArray(ko.utils.arrayMap(items, function(obj){
+			self.items = ko.observableArray(ko.utils.arrayMap(items, function(obj)
 				{
 					return new TShoppingCart.Product(obj);
 				})
