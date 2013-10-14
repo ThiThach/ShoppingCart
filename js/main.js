@@ -14,11 +14,11 @@ require( ['cart'], function( ) {
 						{id:3,name:'Coffee',price:'12.99',stock:50} 
 						];
 						
-						
-			for (var i=0, len=items.length; i<len; i++){
-				var item = new TShoppingCart.Product(items[i]);
-				self.items().push(item);
-			}
+			self.items = ko.observableArray(ko.utils.arrayMap(items, function(obj){
+				{
+					return new TShoppingCart.Product(obj);
+				})
+			);
 		};
 		
 		self.buy = function(item) {
