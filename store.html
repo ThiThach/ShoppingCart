@@ -8,8 +8,13 @@
 	<body>
 		<article>
 			<header><h1>Available items</h1></header>
+			
+			<div>
+				Search: <input type="text" data-bind="value:filterText,valueUpdate:'afterkeydown'" />
+			</div>
+			
 			<button type="button" data-bind="click:newItem">New product</button>
-			<div data-bind="foreach:items">
+			<div data-bind="foreach:filterProducts">
 				<div>
 					<span data-bind="text:name"></span>,
 					$<span data-bind="text:price"></span>,

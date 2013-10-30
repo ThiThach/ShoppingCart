@@ -1,25 +1,27 @@
 require( ['cart'], function( ) {
 
+	var items = [
+				{id:1,name:'Milk',price:'1.75',stock:10},
+				{id:2,name:'Sugar',price:'2.50',stock:20},
+				{id:3,name:'Coffee',price:'12.99',stock:50} 
+				];
+						
 	window.TShoppingCart =  window.TShoppingCart || {};
+
+						
 	window.TShoppingCart.App = function(data) {
 		var self = this;
+
+		self.items = ko.observableArray(ko.utils.arrayMap(items, function(obj)
+			{
+				return new TShoppingCart.Product(obj);
+			})
+		);
+
 		
-		self.items = ko.observableArray([]);
 		self.cart = new window.TShoppingCart.Cart();
-		
-		self.init = function(){
-			var items = [
-						{id:1,name:'Milk',price:'1.75',stock:10},
-						{id:2,name:'Sugar',price:'2.50',stock:20},
-						{id:3,name:'Coffee',price:'12.99',stock:50} 
-						];
-						
-			self.items = ko.observableArray(ko.utils.arrayMap(items, function(obj)
-				{
-					return new TShoppingCart.Product(obj);
-				})
-			);
-		};
+		self.filterText = ko.observable("");		
+	
 		
 		self.buy = function(item) {
 			self.cart.add(item);
@@ -71,13 +73,28 @@ require( ['cart'], function( ) {
 		
 		self.cancelItem = function(){
 			self.selectedItem(null);
-		}	
-	};
+		}
+		
+		
+		self.filterProducts = ko.dependentObservable(function () {	
+			
+			var term = this.filterText().toLowerCase();
+			if (!term)
+			 	return this.items();
 	
+	        return ko.utils.arrayFilter(this.items(), function (item) {
+                return (item.name().toLowerCase().search(term) !== -1);
+			});
+		}, self);
+	
+					
+	};
+
+		
+			
 	//Initalise new shopping cart
 	setTimeout(function(){
 		var app = new window.TShoppingCart.App();
-		app.init();
 		ko.applyBindings(app);	
 	}, 400);
 	
