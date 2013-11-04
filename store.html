@@ -13,22 +13,23 @@
 		<article>
 			<header><h1>Available items</h1></header>
 			
-			<div>
+			<div class="search-div">
 				Search: <input type="text" data-bind="value:filterText,valueUpdate:'afterkeydown'" />
+				<a href="#" data-bind="click:newItem">New product</a>
 			</div>
 			
-			<button type="button" data-bind="click:newItem">New product</button>
-			<div data-bind="foreach:filterProducts">
+			
+			<div class="product-div" data-bind="foreach:filterProducts">
 				<div>
 					<span data-bind="text:name"></span>,
 					$<span data-bind="text:price"></span>,
 					<span data-bind="text:stock()"></span>
-					<button type="button" data-bind="visible:inStock,click:$parent.buy">Buy</button>
-					<span data-bind="visible:!inStock()">Sold out!!!</span>
+					<a href="#" type="button" data-bind="visible:inStock,click:$parent.buy">Buy</a>
+					<span class="soldout" data-bind="visible:!inStock()">Sold out!!!</span>
 					|
-					<button data-bind="click:$parent.selectItem">Edit</button>
+					<a href="#" data-bind="click:$parent.selectItem">Edit</a>
 					|
-					<button data-bind="click:$parent.remove">Remove</button>
+					<a href="#" data-bind="click:$parent.remove">Remove</a>
 				</div>
 			
 			</div>
@@ -45,8 +46,8 @@
 					<input type="text" data-bind="value:name"></input>,
 					<input type="text" data-bind="value:price"></input>,
 					<input type="text" data-bind="value:stock"></input>
-					<button type="button" data-bind="click:$parent.saveItem">Save</button>
-					<button data-bind="click:$parent.cancelItem">Cancel</button>
+					<a href="#" type="button" data-bind="click:$parent.saveItem">Save</a>
+					<a href="#" data-bind="click:$parent.cancelItem">Cancel</a>
 				</div>
 		</article>
 		
@@ -71,13 +72,13 @@
 							Quantity: <input type="text" data-bind="value:bought"/>, 
 							@ price: $<span data-bind="text:price"></span>, 
 							Total: $<span data-bind="text:total"></span> 
-							<button type="button" data-bind="click:updatePurchaseQuantity">Update</button>
-							<button type="button" data-bind="click:reset">Remove</button>
+							<a href="#" type="button" data-bind="click:updatePurchaseQuantity">Update</a>
+							<a href="#" type="button" data-bind="click:reset">Remove</a>
 						</div>
 					</article>
 				</div>
 				
-				<div data-bind="visible:!isEmpty()">
+				<div class="subtotal-div" data-bind="visible:!isEmpty()">
 				Sub total: $<span data-bind="text:subtotal"></span>
 				</div>
 			</article>
