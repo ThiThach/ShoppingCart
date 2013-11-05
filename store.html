@@ -26,7 +26,7 @@
 					</div>
 					
 					<div class="price">
-						$<span data-bind="text:price"></span>
+						<span data-bind="text: formatCurrency(price())"></span>
 					</div>
 					
 					<div class="stock">
@@ -81,8 +81,8 @@
 						<header><h3 data-bind="text:name"></h3></header>
 						<div>
 							Quantity: <input type="text" data-bind="value:bought"/>, 
-							@ price: $<span data-bind="text:price"></span>, 
-							Total: $<span data-bind="text:total"></span> 
+							@ price: <span data-bind="text: formatCurrency(price())"></span>, 
+							Total: <span data-bind="text: formatCurrency(total())"></span> 
 							<a href="#" type="button" data-bind="click:updatePurchaseQuantity">Update</a>
 							<a href="#" type="button" data-bind="click:reset">Remove</a>
 						</div>
@@ -90,7 +90,7 @@
 				</div>
 				
 				<div class="subtotal-div" data-bind="visible:!isEmpty()">
-				Sub total: $<span data-bind="text:subtotal"></span>
+				Sub total: <span data-bind="text:formatCurrency(subtotal())"></span>
 				</div>
 			</article>
 		</div>

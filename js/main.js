@@ -1,3 +1,9 @@
+//Global functions
+function formatCurrency(price) {
+
+	return '$' + parseFloat(price).toFixed(2);
+}
+	
 require( ['cart'], function( ) {
 
 	var items = [
@@ -90,7 +96,6 @@ require( ['cart'], function( ) {
 					
 	};
 
-		
 			
 	//Initalise new shopping cart
 	setTimeout(function(){
