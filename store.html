@@ -10,6 +10,10 @@
 	</head>
 	
 	<body>
+	
+		<div class='main'>
+		
+		<!-- Available items -->
 		<article data-bind="visible:!selectedItem()">
 			<header><h1>Available items</h1></header>
 			
@@ -33,7 +37,7 @@
 						<span data-bind="text:stock()"></span>
 					</div>
 					
-					<div class="action">
+					<div class="action hide-by-default">
 						<a href="#" data-bind="click:$parent.selectItem">Edit</a>
 						<a href="#" data-bind="click:$parent.remove">Remove</a>
 						<a href="#" type="button" data-bind="visible:inStock,click:$parent.buy">Buy</a>
@@ -45,9 +49,8 @@
 			</div>
 		</article>
 		
-		
-		
-		<article class='selected-item shadow-border-box edit-item' data-bind="with:selectedItem,visible:selectedItem">
+		<!-- Edit or create new item -->	
+		<article class='hide-by-default selected-item shadow-border-box edit-item' data-bind="with:selectedItem,visible:selectedItem">
 			<header>
 				<h2 data-bind="if:!id()">New Product</h2>
 				<h2 data-bind="if:id()">Editing</h2>
@@ -64,9 +67,8 @@
 				<div class="clear"></div>
 			</div>
 		</article>
-		
-		
-		
+				
+		<!-- Purchased items -->
 		<div data-bind="visible:!selectedItem()">
 			<article data-bind="with:cart">
 
@@ -77,7 +79,7 @@
 					</div>			
 					
 					
-				<div data-bind="foreach:items">
+				<div class='hide-by-default' data-bind="foreach:items">
 					<div class="item-art">
 						<div class="name">
 							<span data-bind="text:name"></span>
@@ -103,15 +105,17 @@
 					</div>
 				</div>
 				
-				<div class="subtotal-div" data-bind="visible:!isEmpty()">
-				Sub total: <span data-bind="text:formatCurrency(subtotal())"></span>
+				<div class="hide-by-default subtotal-div" data-bind="visible:!isEmpty()">
+					Sub total: <span data-bind="text:formatCurrency(subtotal())"></span>
 				</div>
 			</article>
 		</div>
 		
-
+		</div>
+		
 	</body>
 
+	<script src="js/thirdparties/jquery-2.0.3.js"></script>			
 	<script type="text/javascript" src="js/thirdparties/knockout-3.0.0beta.debug.js"></script>
 	<script type="text/javascript" src="js/utilities/ko-protected-observable.js"></script>
 	<script data-main="js/main.js" src="js/thirdparties/require.js"></script>
