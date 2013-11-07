@@ -11,106 +11,107 @@
 	
 	<body>
 	
-		<div class='main'>
-		
-		<!-- Available items -->
-		<article data-bind="visible:!selectedItem()">
-			<header><h1>Available items</h1></header>
-			
-			<div class="shadow-border-box search-div">
-				Search: <input type="text" data-bind="value:filterText,valueUpdate:'afterkeydown'" />
-				<a href="#" data-bind="click:newItem">New product</a>
-			</div>
-			
-			
-			<div class="product-div" data-bind="foreach:filterProducts">
-				<div class="item-art">
-					<div class="name">
-						<span data-bind="text:name"></span>
-					</div>
-					
-					<div class="price">
-						<span data-bind="text: formatCurrency(price())"></span>
-					</div>
-					
-					<div class="stock">
-						<span data-bind="text:stock()"></span>
-					</div>
-					
-					<div class="action hide-by-default">
-						<a href="#" data-bind="click:$parent.selectItem">Edit</a>
-						<a href="#" data-bind="click:$parent.remove">Remove</a>
-						<a href="#" type="button" data-bind="visible:inStock,click:$parent.buy">Buy</a>
-						<span class="soldout" data-bind="visible:!inStock()">Sold out!!!</span>
-					</div>
-					
-					<div class="clear"></div>
-				</div>
-			</div>
-		</article>
-		
-		<!-- Edit or create new item -->	
-		<article class='hide-by-default selected-item shadow-border-box edit-item' data-bind="with:selectedItem,visible:selectedItem">
-			<header>
-				<h2 data-bind="if:!id()">New Product</h2>
-				<h2 data-bind="if:id()">Editing</h2>
-			</header>
-			<div class='edit'>
-				<div><span>Name:</span><input type="text" data-bind="value:name"></input></div>
-				<div><span>Price:</span><input class='price' type="text" data-bind="value:price"></input></div>
-				<div><span>Quantity:</span><input class='quantity' type="text" data-bind="value:stock"></input></div>
-				<div class='action'>
-					<a href="#" type="button" data-bind="click:$parent.saveItem">Save</a>
-					<a href="#" data-bind="click:$parent.cancelItem">Cancel</a>
+		<div class='main hide-by-default'>
+
+			<!-- Available items -->
+			<article data-bind="visible:!selectedItem()">
+				<header><h1>Available items</h1></header>
+				
+				<div class="shadow-border-box search-div">
+					Search: <input type="text" data-bind="value:filterText,valueUpdate:'afterkeydown'" />
+					<a href="#" data-bind="click:newItem">New product</a>
 				</div>
 				
-				<div class="clear"></div>
-			</div>
-		</article>
 				
-		<!-- Purchased items -->
-		<div data-bind="visible:!selectedItem()">
-			<article data-bind="with:cart">
-
-				<header><h1>What's in my cart</h1></header>
-
-					<div data-bind="if:isEmpty">
-						Currently is empty
-					</div>			
-					
-					
-				<div class='hide-by-default' data-bind="foreach:items">
+				<div class="product-div" data-bind="foreach:filterProducts">
 					<div class="item-art">
 						<div class="name">
 							<span data-bind="text:name"></span>
 						</div>
 						
-						<div class="stock">
-							<input class="quantity" type="text" data-bind="value:bought"/>
+						<div class="price">
+							<span data-bind="text: formatCurrency(price())"></span>
 						</div>
 						
-						<div class="price">
-							@ <span data-bind="text: formatCurrency(price())"></span>
+						<div class="stock">
+							<span data-bind="text:stock()"></span>
 						</div>
 						
 						<div class="action">
-							<strong>Total: <span data-bind="text: formatCurrency(total())"></span></strong> 
+							<a href="#" data-bind="click:$parent.selectItem">Edit</a>
+							<a href="#" data-bind="click:$parent.remove">Remove</a>
+							<a href="#" type="button" data-bind="visible:inStock,click:$parent.buy">Buy</a>
+							<span class="soldout" data-bind="visible:!inStock()">Sold out!!!</span>
 						</div>
 						
-						
-						<a href="#" type="button" data-bind="click:updatePurchaseQuantity">Update</a>
-						<a href="#" type="button" data-bind="click:reset">Remove</a>
-
 						<div class="clear"></div>
 					</div>
 				</div>
-				
-				<div class="hide-by-default subtotal-div" data-bind="visible:!isEmpty()">
-					Sub total: <span data-bind="text:formatCurrency(subtotal())"></span>
+			</article>
+			
+			<!-- Edit or create new item -->	
+			<article class='selected-item shadow-border-box edit-item' data-bind="with:selectedItem,visible:selectedItem">
+				<header>
+					<h2 data-bind="if:!id()">New Product</h2>
+					<h2 data-bind="if:id()">Editing</h2>
+				</header>
+				<div class='edit'>
+					<div><span>Name:</span><input type="text" data-bind="value:name"></input></div>
+					<div><span>Price:</span><input class='price' type="text" data-bind="value:price"></input></div>
+					<div><span>Quantity:</span><input class='quantity' type="text" data-bind="value:stock"></input></div>
+					<div class='action'>
+						<a href="#" type="button" data-bind="click:$parent.saveItem">Save</a>
+						<a href="#" data-bind="click:$parent.cancelItem">Cancel</a>
+					</div>
+					
+					<div class="clear"></div>
 				</div>
 			</article>
-		</div>
+					
+			<!-- Purchased items -->
+			<div data-bind="visible:!selectedItem()">
+				<article data-bind="with:cart">
+	
+					<header><h1>What's in my cart</h1></header>
+	
+						<div data-bind="if:isEmpty">
+							Currently is empty
+						</div>			
+						
+						
+					<div data-bind="foreach:items">
+						<div class="item-art">
+							<div class="name">
+								<span data-bind="text:name"></span>
+							</div>
+							
+							<div class="stock">
+								<input class="quantity" type="text" data-bind="value:bought"/>
+							</div>
+							
+							<div class="price">
+								@ <span data-bind="text: formatCurrency(price())"></span>
+							</div>
+							
+							<div class="action">
+								<strong>Total: <span data-bind="text: formatCurrency(total())"></span></strong> 
+							</div>
+							
+							
+							<a href="#" type="button" data-bind="click:updatePurchaseQuantity">Update</a>
+							<a href="#" type="button" data-bind="click:reset">Remove</a>
+	
+							<div class="clear"></div>
+						</div>
+					</div>
+					
+					<div class="subtotal-div" data-bind="visible:!isEmpty()">
+						Sub total: <span data-bind="text:formatCurrency(subtotal())"></span>
+					</div>
+				</article>
+			</div>
 		
+				
 		</div>
 		
 	</body>

@@ -6,9 +6,10 @@ function formatCurrency(price) {
 
 //remove display:none for div with class hide-by-default
 function removeHiddenByDefaultItem(timeout){
-	setTimeout(function(){
-		$('.hide-by-default').removeClass('hide-by-default');
-	}, parseInt(timeout));
+	var main = $('.main');
+	main.fadeIn(1000, function() {
+		main.removeClass('hide-by-default');
+	});
 }
 
 $(function()
@@ -82,7 +83,6 @@ $(function()
 					var obj = {id:self.items().length+1,name:currentItem.name(),price:currentItem.price(),stock:currentItem.stock()};
 					var item = new TShoppingCart.Product(obj);
 					self.items.push(item);
-					removeHiddenByDefaultItem(100);
 				}
 				
 				self.cancelItem();
