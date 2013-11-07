@@ -10,10 +10,10 @@
 	</head>
 	
 	<body>
-		<article>
+		<article data-bind="visible:!selectedItem()">
 			<header><h1>Available items</h1></header>
 			
-			<div class="search-div">
+			<div class="shadow-border-box search-div">
 				Search: <input type="text" data-bind="value:filterText,valueUpdate:'afterkeydown'" />
 				<a href="#" data-bind="click:newItem">New product</a>
 			</div>
@@ -42,31 +42,32 @@
 					
 					<div class="clear"></div>
 				</div>
-			
 			</div>
 		</article>
 		
 		
 		
-		<article data-bind="with:selectedItem">
+		<article class='selected-item shadow-border-box edit-item' data-bind="with:selectedItem,visible:selectedItem">
 			<header>
-				<h2 data-bind="if:!id()">New</h2>
+				<h2 data-bind="if:!id()">New Product</h2>
 				<h2 data-bind="if:id()">Editing</h2>
 			</header>
-				<div>
-					<input type="text" data-bind="value:name"></input>,
-					<input type="text" data-bind="value:price"></input>,
-					<input type="text" data-bind="value:stock"></input>
+			<div class='edit'>
+				<div><span>Name:</span><input type="text" data-bind="value:name"></input></div>
+				<div><span>Price:</span><input class='price' type="text" data-bind="value:price"></input></div>
+				<div><span>Quantity:</span><input class='quantity' type="text" data-bind="value:stock"></input></div>
+				<div class='action'>
 					<a href="#" type="button" data-bind="click:$parent.saveItem">Save</a>
 					<a href="#" data-bind="click:$parent.cancelItem">Cancel</a>
 				</div>
+				
+				<div class="clear"></div>
+			</div>
 		</article>
 		
 		
 		
-		
-		<hr/>
-		<div>
+		<div data-bind="visible:!selectedItem()">
 			<article data-bind="with:cart">
 
 				<header><h1>What's in my cart</h1></header>
@@ -77,16 +78,29 @@
 					
 					
 				<div data-bind="foreach:items">
-					<article>
-						<header><h3 data-bind="text:name"></h3></header>
-						<div>
-							Quantity: <input type="text" data-bind="value:bought"/>, 
-							@ price: <span data-bind="text: formatCurrency(price())"></span>, 
-							Total: <span data-bind="text: formatCurrency(total())"></span> 
-							<a href="#" type="button" data-bind="click:updatePurchaseQuantity">Update</a>
-							<a href="#" type="button" data-bind="click:reset">Remove</a>
+					<div class="item-art">
+						<div class="name">
+							<span data-bind="text:name"></span>
 						</div>
-					</article>
+						
+						<div class="stock">
+							<input class="quantity" type="text" data-bind="value:bought"/>
+						</div>
+						
+						<div class="price">
+							@ <span data-bind="text: formatCurrency(price())"></span>
+						</div>
+						
+						<div class="action">
+							<strong>Total: <span data-bind="text: formatCurrency(total())"></span></strong> 
+						</div>
+						
+						
+						<a href="#" type="button" data-bind="click:updatePurchaseQuantity">Update</a>
+						<a href="#" type="button" data-bind="click:reset">Remove</a>
+
+						<div class="clear"></div>
+					</div>
 				</div>
 				
 				<div class="subtotal-div" data-bind="visible:!isEmpty()">
