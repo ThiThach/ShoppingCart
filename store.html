@@ -52,13 +52,13 @@
 			<!-- Edit or create new item -->	
 			<article class='selected-item shadow-border-box edit-item' data-bind="with:selectedItem,visible:selectedItem">
 				<header>
-					<h2 data-bind="if:!id()">New Product</h2>
-					<h2 data-bind="if:id()">Editing</h2>
+					<h2 data-bind="if:!id(),visible:!id()">New Product</h2>
+					<h2 data-bind="if:id(),visible:id()">Editing</h2>
 				</header>
 				<div class='edit'>
 					<div><span>Name:</span><input type="text" data-bind="value:name"></input></div>
 					<div><span>Price:</span><input class='price' type="text" data-bind="value:price"></input></div>
-					<div><span>Quantity:</span><input class='quantity' type="text" data-bind="value:stock"></input></div>
+					<div class='dashed-bottom'><span>Quantity:</span><input class='quantity' type="text" data-bind="value:stock"></input></div>
 					<div class='action'>
 						<a href="#" type="button" data-bind="click:$parent.saveItem">Save</a>
 						<a href="#" data-bind="click:$parent.cancelItem">Cancel</a>
@@ -69,7 +69,7 @@
 			</article>
 					
 			<!-- Purchased items -->
-			<div data-bind="visible:!selectedItem()">
+			<div class="shadow-border-box purchased-items"  data-bind="visible:!selectedItem()">
 				<article data-bind="with:cart">
 	
 					<header><h1>What's in my cart</h1></header>

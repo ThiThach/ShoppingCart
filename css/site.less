@@ -5,6 +5,7 @@
 @divBorderRadius: 5px;
 @divBorder: 1px solid #e9e9e9;
 @divBoxShadow: 1px 1px 1px #7f7f7f;
+@dashedColor : #e8e8e8;
 
 
 body{
@@ -62,6 +63,15 @@ a {
 		padding-bottom: 40px;
 		box-sizing: border-box;
 	}
+	
+	&.purchased-items{
+		margin-top: 1em;
+		width: 450px;
+	}
+	
+	h1, h2 {
+		border-bottom: 1px dashed @dashedColor;
+	}
 }
 
 
@@ -106,7 +116,7 @@ a {
 	}
 	
 	.action {
-		margin-top: 2px;
+		margin-top: 3px;
 		margin-left:5px;
 		float: left;
 		min-width: 110px;
@@ -118,6 +128,11 @@ a {
 }
 
 .selected-item {	
+	
+	.dashed-bottom {
+		border-bottom: dashed 1px @dashedColor;
+		padding-bottom: 1em;
+	}
 	
 	.price {
 		width: @priceWidth;
@@ -137,9 +152,15 @@ a {
 		}
 		
 		.action {
-			padding: 10px 0px;
-			padding-left: 269px;
-			border-top: dotted 1px #9a9a9a;
+			margin-top: .5em; 
+			width: 170px;
+			margin-left: auto;
+			margin-right: auto;
+			
+			a {
+				padding: 5px 20px;
+				margin-left: 5px;
+			}
 		}
 	}	
 }
