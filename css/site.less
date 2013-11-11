@@ -7,7 +7,6 @@
 @divBoxShadow: 1px 1px 1px #7f7f7f;
 @dashedColor : #e8e8e8;
 
-
 body{
 	font-family: 'play', fantasy, sans-serif;
 }
@@ -173,40 +172,39 @@ a {
 
 
 
-
-
-
-
-/* iphone - mobile safari 4.1 */
+/* 	iphone - mobile safari 4.1 */
 @media only screen and (max-width: 480px) {
 
-	.main {
-		width: 305px !important;
+	@mobileMainWidth: 305px !important;
+	@mobileFont: smaller;
+
+	.main, .selected-item {
+		width: @mobileMainWidth;
 	}	
 	
+	.selected-item, .product-div, .purchased-items {
+		font-size: @mobileFont;
+	}
+
+	.product-div{
+		width: 300px;
+		padding: 0px;
+	}
+
+	.purchased-items, .search-div, .edit-item {
+		width: auto !important;
+	}
 	
-	.search-div{
-		width: 280px !important;
 		
+	.search-div{
 		input {
 			width: 125px;
 		}
 	}
 	
-	.product-div{
-		font-size: smaller;
-		width: 300px;
-		padding: 0px;
-	}	
-	
 	.item-art{
 		
-		.name {
-			min-width: 55px !important;
-			width: 55px !important;
-		}
-		
-		.price {
+		.name, .price {
 			min-width: 55px !important;
 			width: 55px !important;
 		}
@@ -216,28 +214,14 @@ a {
 			width: 40px !important;
 		}
 		
-		.soldout
+		.soldout,.line-total
 		{
 			display: none;
 		}
-		
-		.line-total{
-			display: none;
-		}
 	}
-	
-	
-	.purchased-items{
-		width: 280px !important;
-		font-size: smaller;
-	}	
 	
 	.subtotal-div{
 		margin-left: 0px;
 	}
 	
-	.selected-item {
-		width: 305px !important;
-		font-size: smaller;
-	}
 }
