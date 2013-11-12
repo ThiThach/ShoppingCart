@@ -7,6 +7,6 @@ The aim of the project is solely for demostrating purposes where I tried to comb
 
 This is a working in progress, please feel free to make changes and contributes.
 
-Technologies uesed:
+Technologies used:
 
 KnockoutJS, RequiredJS, jQuery, CSS3 (@media query = responsive design), LESS css.
